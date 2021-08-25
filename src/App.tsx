@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { EventHandler, useEffect, useState } from "react";
 import logo from "./logo.svg";
 import "./App.css";
+import { Url } from "url";
 
 class User {
   constructor(public name: string, public lastname: string, public image: string) {
@@ -17,8 +18,8 @@ const createUser = (user: User) => ({
   created: new Date().getTime(),
 });
 
-function createInput(labelName: any, onChange: any) {
-  const handleChange = (e: any) => onChange(e.target.value);
+function createInput(labelName: string, onChange: React.Dispatch<React.SetStateAction<string>>) {
+  const handleChange = (e: React.FormEvent<HTMLInputElement>) => onChange(e.currentTarget.value);
   return (
     <label>
       {labelName}:<input type="text" onChange={handleChange}></input>
@@ -29,15 +30,15 @@ function createInput(labelName: any, onChange: any) {
 function App() {
   const [user, setUser] = useState<any>();
   const [givenName, setGivenName] = useState("");
-  const [surname, setSurname] = useState();
-  const [imageUrl, setImageUrl] = useState();
+  const [surname, setSurname] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
 
   const onSubmit = (e: any) => {
     e.preventDefault();
     const newUser = createUser({
       name: givenName,
       lastname: surname,
-      image: { uri: imageUrl },
+      image: { uri: imageUrl},
     });
     setUser(newUser);
   };
