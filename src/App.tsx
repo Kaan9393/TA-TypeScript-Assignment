@@ -27,17 +27,17 @@ function createInput(labelName: string, onChange: React.Dispatch<React.SetStateA
 }
 
 function App() {
-  const [user, setUser] = React.useState<IUser|null>(null);
+  const [user, setUser] = useState<any>();
   const [givenName, setGivenName] = useState("");
   const [surname, setSurname] = useState("");
-  const [imageUrl, setImageUrl] = React.useState<string|null>();
+  const [imageUrl, setImageUrl] = useState("");
 
   const onSubmit = (e: any) => {
     e.preventDefault();
     const newUser = createUser({
       name: givenName,
       lastname: surname,
-      image: { uri: imageUrl},
+      image: imageUrl,
     });
     setUser(newUser);
   };
@@ -82,7 +82,7 @@ function App() {
             <span>Image</span>
             <img
               alt=""
-              src={user?.picture?.uri || placeHolderImage}
+              src={user?.picture || placeHolderImage}
               style={{
                 width: 60,
                 height: 60,
