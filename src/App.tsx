@@ -1,17 +1,16 @@
 import React, { EventHandler, useEffect, useState } from "react";
 import logo from "./logo.svg";
 import "./App.css";
-import { Url } from "url";
+import { Url, UrlObject } from "url";
+import { url } from "inspector";
 
-class User {
-  constructor(public name: string, public lastname: string, public image: string) {
-    this.name = name;
-    this.lastname = lastname;
-    this.image = image;
-  }
+interface IUser {
+    name: string;
+    lastname: string;
+    image: string;
 }
 
-const createUser = (user: User) => ({
+const createUser = (user: IUser) => ({
   givenName: user.name,
   surname: user.lastname,
   picture: user.image,
@@ -28,10 +27,10 @@ function createInput(labelName: string, onChange: React.Dispatch<React.SetStateA
 }
 
 function App() {
-  const [user, setUser] = useState<any>();
+  const [user, setUser] = React.useState<IUser|null>(null);
   const [givenName, setGivenName] = useState("");
   const [surname, setSurname] = useState("");
-  const [imageUrl, setImageUrl] = useState("");
+  const [imageUrl, setImageUrl] = React.useState<string|null>();
 
   const onSubmit = (e: any) => {
     e.preventDefault();
