@@ -2,7 +2,15 @@ import React, { useEffect, useState } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 
-const createUser = (user: any) => ({
+class User {
+  constructor(public name: string, public lastname: string, public image: string) {
+    this.name = name;
+    this.lastname = lastname;
+    this.image = image;
+  }
+}
+
+const createUser = (user: User) => ({
   givenName: user.name,
   surname: user.lastname,
   picture: user.image,
