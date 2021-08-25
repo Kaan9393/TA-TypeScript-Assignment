@@ -2,14 +2,22 @@ import React, { useEffect, useState } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 
-const createUser = (user: any) => ({
+
+interface IUser
+{
+  name : string,
+  lastname : string,
+  image : object
+};
+
+const createUser = (user: IUser) => ({
   givenName: user.name,
   surname: user.lastname,
   picture: user.image,
   created: new Date().getTime(),
 });
 
-function createInput(labelName: any, onChange: any) {
+function createInput(labelName: string, onChange: any) {
   const handleChange = (e: any) => onChange(e.target.value);
   return (
     <label>
@@ -21,7 +29,7 @@ function createInput(labelName: any, onChange: any) {
 function App() {
   const [user, setUser] = useState<any>();
   const [givenName, setGivenName] = useState("");
-  const [surname, setSurname] = useState();
+  const [surname, setSurname] = useState("");
   const [imageUrl, setImageUrl] = useState();
 
   const onSubmit = (e: any) => {
